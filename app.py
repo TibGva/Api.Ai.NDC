@@ -40,7 +40,7 @@ def processRequest(req):
     #    return {}
     
     if req.get("result").get("action") != "NDCCall":
-        print("OK NDCCall)
+        print("OK NDCCall")
         return {}
     elif req.get("result").get("action") == "yahooWeatherForecast":
         baseurl = "https://query.yahooapis.com/v1/public/yql?"
