@@ -13,9 +13,6 @@ import os
 
 import sys, httplib
 
-HOST = iata.api.mashery.com
-API_URL = /Zeus/NDC
-
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -67,6 +64,8 @@ def processRequest(req):
 
 def do_request(xml_location):
 	"""HTTP XML Post request, by www.forceflow.be"""
+	HOST = "iata.api.mashery.com"
+	API_URL = "/Zeus/NDC"
 	request = open(xml_location,"r").read()
     	webservice = httplib.HTTP(HOST)
 	webservice.putrequest("POST", API_URL)
