@@ -76,6 +76,7 @@ def do_request(xml_location):
     webservice.putheader("User-Agent", "Python post")
     webservice.putheader("Content-type", "text/xml; charset=\"UTF-8\"")
     webservice.putheader("Content-length", "%d" % len(request))
+    webservice.putheader("Authorization-key", "ytp54tsm4556tt76hhppmfsr")
     webservice.endheaders()
 
     webservice.send(request)
