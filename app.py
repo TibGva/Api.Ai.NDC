@@ -11,6 +11,11 @@ from urllib.error import HTTPError
 import json
 import os
 
+import sys, httplib
+
+HOST = iata.api.mashery.com
+API_URL = /Zeus/NDC
+
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -36,11 +41,10 @@ def webhook():
 
 
 def processRequest(req):
-    #if req.get("result").get("action") != "yahooWeatherForecast":
-    #    return {}
-    
     if req.get("result").get("action") == "NDCCall":
         print("OK NDCCall")
+        #do_request("myfile.xml")
+        do_request()
         return {
         "speech": "OK NDCCall",
         "displayText": "OK NDCCall",
@@ -62,6 +66,88 @@ def processRequest(req):
        return {} 
 
 
+
+#def do_request(xml_location):
+def do_request():
+	"""HTTP XML Post request, by www.forceflow.be"""
+	#request = open(xml_location,"r").read()
+    request = "<AirShoppingRQ xmlns="http://www.iata.org/IATA/EDIST/2017.1" Version="IATA2017.1">
+  <Document>
+    <Name>ZEUS NDC GATEWAY</Name>
+    <ReferenceVersion>1.0</ReferenceVersion>
+  </Document>
+  <Party>
+    <Sender>
+      <TravelAgencySender>
+        <Name>JR TECHNOLOGIES</Name>
+        <IATA_Number>12312312</IATA_Number>
+        <AgencyID Owner="Z9">Z9</AgencyID>
+      </TravelAgencySender>
+    </Sender>
+    <Participants>
+      <Participant>
+        <AggregatorParticipant SequenceNumber="1">
+          <Name>JR TECHNOLOGIES</Name>
+          <AggregatorID>88888888</AggregatorID>
+        </AggregatorParticipant>
+      </Participant>
+    </Participants>
+  </Party>
+  <CoreQuery>
+    <OriginDestinations>
+      <OriginDestination>
+        <Departure>
+          <AirportCode>LHR</AirportCode>
+          <Date>2017-07-26</Date>
+        </Departure>
+        <Arrival>
+          <AirportCode>DXB</AirportCode>
+        </Arrival>
+      </OriginDestination>
+    </OriginDestinations>
+  </CoreQuery>
+  <Preference>
+    <FarePreferences>
+      <Types>
+        <Type>759</Type>
+      </Types>
+    </FarePreferences>
+    <CabinPreferences>
+      <CabinType>
+        <Code>M</Code>
+      </CabinType>
+    </CabinPreferences>
+  </Preference>
+  <DataLists>
+    <PassengerList>
+      <Passenger PassengerID="SH1">
+        <PTC>ADT</PTC>
+      </Passenger>
+      <Passenger PassengerID="SH2">
+        <PTC>ADT</PTC>
+      </Passenger>
+    </PassengerList>
+  </DataLists>
+</AirShoppingRQ>
+"
+    
+    
+	webservice = httplib.HTTP(HOST)
+	webservice.putrequest("POST", API_URL)
+	webservice.putheader("Host", HOST)
+	webservice.putheader("User-Agent","Python post")
+	webservice.putheader("Content-type", "text/xml; charset=\"UTF-8\"")
+	webservice.putheader("Content-length", "%d" % len(request))
+	webservice.endheaders()
+	webservice.send(request)
+	statuscode, statusmessage, header = webservice.getreply()
+	result = webservice.getfile().read()
+        print statuscode, statusmessage, header
+        print result
+
+
+
+
 def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
@@ -71,6 +157,10 @@ def makeYqlQuery(req):
 
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
+def callNDC():
+    print("calling NDC sandbox")
+    
+    return {}
 
 def makeWebhookResult(data):
     query = data.get('query')
