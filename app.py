@@ -70,68 +70,9 @@ def processRequest(req):
 #def do_request(xml_location):
 def do_request():
 	"""HTTP XML Post request, by www.forceflow.be"""
-	#request = open(xml_location,"r").read()
-    request = "<AirShoppingRQ xmlns="http://www.iata.org/IATA/EDIST/2017.1" Version="IATA2017.1">
-  <Document>
-    <Name>ZEUS NDC GATEWAY</Name>
-    <ReferenceVersion>1.0</ReferenceVersion>
-  </Document>
-  <Party>
-    <Sender>
-      <TravelAgencySender>
-        <Name>JR TECHNOLOGIES</Name>
-        <IATA_Number>12312312</IATA_Number>
-        <AgencyID Owner="Z9">Z9</AgencyID>
-      </TravelAgencySender>
-    </Sender>
-    <Participants>
-      <Participant>
-        <AggregatorParticipant SequenceNumber="1">
-          <Name>JR TECHNOLOGIES</Name>
-          <AggregatorID>88888888</AggregatorID>
-        </AggregatorParticipant>
-      </Participant>
-    </Participants>
-  </Party>
-  <CoreQuery>
-    <OriginDestinations>
-      <OriginDestination>
-        <Departure>
-          <AirportCode>LHR</AirportCode>
-          <Date>2017-07-26</Date>
-        </Departure>
-        <Arrival>
-          <AirportCode>DXB</AirportCode>
-        </Arrival>
-      </OriginDestination>
-    </OriginDestinations>
-  </CoreQuery>
-  <Preference>
-    <FarePreferences>
-      <Types>
-        <Type>759</Type>
-      </Types>
-    </FarePreferences>
-    <CabinPreferences>
-      <CabinType>
-        <Code>M</Code>
-      </CabinType>
-    </CabinPreferences>
-  </Preference>
-  <DataLists>
-    <PassengerList>
-      <Passenger PassengerID="SH1">
-        <PTC>ADT</PTC>
-      </Passenger>
-      <Passenger PassengerID="SH2">
-        <PTC>ADT</PTC>
-      </Passenger>
-    </PassengerList>
-  </DataLists>
-</AirShoppingRQ>
-"
-    
-    
+#request = open(xml_location,"r").read()
+    	request = "<AirShoppingRQ xmlns="""http://www.iata.org/IATA/EDIST/2017.1""" Version="""IATA2017.1"""></AirShoppingRQ>"
+     
 	webservice = httplib.HTTP(HOST)
 	webservice.putrequest("POST", API_URL)
 	webservice.putheader("Host", HOST)
