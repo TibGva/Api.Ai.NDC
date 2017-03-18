@@ -43,8 +43,7 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") == "NDCCall":
         print("OK NDCCall")
-        #do_request("myfile.xml")
-        do_request()
+        do_request("http://84.227.15.147:3000/MyWebservices/AirShopRQ.xml")
         return {
         "speech": "OK NDCCall",
         "displayText": "OK NDCCall",
@@ -66,14 +65,10 @@ def processRequest(req):
        return {} 
 
 
-
-#def do_request(xml_location):
-def do_request():
+def do_request(xml_location):
 	"""HTTP XML Post request, by www.forceflow.be"""
-#request = open(xml_location,"r").read()
-    	request = "<AirShoppingRQ xmlns="""http://www.iata.org/IATA/EDIST/2017.1""" Version="""IATA2017.1"""></AirShoppingRQ>"
-     
-	webservice = httplib.HTTP(HOST)
+	request = open(xml_location,"r").read()
+    	webservice = httplib.HTTP(HOST)
 	webservice.putrequest("POST", API_URL)
 	webservice.putheader("Host", HOST)
 	webservice.putheader("User-Agent","Python post")
