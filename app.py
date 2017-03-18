@@ -39,7 +39,7 @@ def processRequest(req):
     #if req.get("result").get("action") != "yahooWeatherForecast":
     #    return {}
     
-    if req.get("result").get("action") != "NDCCall":
+    if req.get("result").get("action") == "NDCCall":
         print("OK NDCCall")
         return {
         "speech": "OK NDCCall",
