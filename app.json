@@ -1,7 +1,7 @@
 {
-  "name": "API.AI webhook demonstration",
-  "description": "API.AI webhook demonstration",
-  "repository": "https://github.com/api-ai/apiai-weather-webhook-sample",
+  "name": "Webhook with IATA NDC ONE Order",
+  "description": "API.AI webhook demonstration NDC",
+  "repository": "https://github.com/ThibautRuy/Api.Ai.NDC",
   "logo": "http://xvir.github.io/img/apiai.png",
-  "keywords": ["api.ai", "natural language"]
+  "keywords": ["api.ai", "natural language", "IATA", "NDC", "ONE Order"]
 }
